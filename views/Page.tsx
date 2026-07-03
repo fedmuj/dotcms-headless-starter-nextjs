@@ -1,11 +1,16 @@
 "use client";
 
-import { DotCMSLayoutBody, useEditableDotCMSPage } from "@dotcms/react";
+import {
+  DotCMSLayoutBody,
+  useEditableDotCMSPage,
+  useStyleEditorSchemas,
+} from "@dotcms/react";
 import type {
   DotCMSComposedPageResponse,
   DotCMSPageResponse,
 } from "@dotcms/types";
 import { pageComponents } from "@/components/content-types";
+import { FMC_CARD_SCHEMA } from "@/components/content-types/FMCCard.styles";
 
 /*
  * Client-side page renderer. Wraps the raw DotCMS page data with
@@ -21,6 +26,9 @@ interface PageProps {
 
 export function Page({ pageContent }: PageProps) {
   const { pageAsset } = useEditableDotCMSPage(pageContent);
+
+  /* Registers Style Editor forms with UVE (no-op outside the editor). */
+  useStyleEditorSchemas([FMC_CARD_SCHEMA]);
 
   return (
     <main className="container mx-auto ">

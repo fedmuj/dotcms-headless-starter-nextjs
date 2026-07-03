@@ -1,3 +1,7 @@
+import Banner from "./Banner";
+import BannerCarousel from "./BannerCarousel";
+import FMCCard from "./FMCCard";
+
 /*
  * Maps DotCMS content-types to React components.
  * DotCMSLayoutBody uses this map to decide which component to render for each
@@ -5,4 +9,8 @@
  *   import HeroCard from "./HeroCard";
  *   export const pageComponents = { HeroCard: HeroCard};
  */
-export const pageComponents = {};
+export const pageComponents = {
+  Banner: Banner,
+  BannerCarousel: BannerCarousel,
+  FMCCard: FMCCard,
+};

@@ -42,9 +42,9 @@ export default async function CatchAllPage({ params }: PageProps) {
 
   return (
     <>
-      {layout?.header && <Header navItems={navItems} />}
+      {layout?.header && <Header navItems={navItems} currentPath={path} />}
       <Page pageContent={pageContent} />
-      {layout?.footer && <Footer />}
+      {layout?.footer && <Footer navItems={navItems} />}
     </>
   );
 }

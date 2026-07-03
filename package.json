@@ -6,17 +6,22 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "cms:pull": "dotcli pull --workspace ./dotcms-workspace",
+    "cms:push:dry": "dotcli push ./dotcms-workspace --dry-run",
+    "cms:push": "dotcli push ./dotcms-workspace"
   },
   "dependencies": {
     "@dotcms/client": "1.4.0",
-    "@dotcms/types": "1.4.0",
     "@dotcms/react": "1.4.0",
+    "@dotcms/types": "1.4.0",
+    "@dotcms/uve": "1.5.0",
     "next": "16.2.4",
     "react": "19.2.4",
     "react-dom": "19.2.4"
   },
   "devDependencies": {
+    "@dotcms/dotcli": "latest",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
