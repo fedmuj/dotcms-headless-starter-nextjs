@@ -3,13 +3,15 @@
  * the DotCMS asset API (/dA/) which supports on-the-fly resizing.
  * Pass this as the `loader` prop on <Image> for any DotCMS-hosted image.
  * The width parameter maps to DotCMS's /{width}w resizing suffix.
+ *
+ * Returns a relative /dA/ URL: the browser requests this app's own origin and
+ * the rewrite in next.config.ts proxies it to the dotCMS host server-side, so
+ * the host doesn't need to be a NEXT_PUBLIC_ env var.
  */
 const ImageLoader = ({ src, width = 250 }: { src: string; width: number }) => {
-  const dotcmsURL = new URL(process.env.NEXT_PUBLIC_DOTCMS_HOST as string)
-    .origin;
   /* If src already contains /dA/ it's a full asset path; otherwise prepend it. */
   const imageSRC = src.includes("/dA/") ? src : `/dA/${src}`;
-  return `${dotcmsURL}${imageSRC}/${width}w`;
+  return `${imageSRC}/${width}w`;
 };
 
 export default ImageLoader;

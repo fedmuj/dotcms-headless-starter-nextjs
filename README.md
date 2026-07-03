@@ -25,13 +25,40 @@ pnpm install
 Create `.env` in the project root:
 
 ```bash
-NEXT_PUBLIC_DOTCMS_HOST=https://your-instance.dotcms.cloud
-NEXT_PUBLIC_DOTCMS_AUTH_TOKEN=<API token, from a user with edit permissions>
-NEXT_PUBLIC_DOTCMS_SITE_ID=<site identifier>
+DOTCMS_HOST=https://your-instance.dotcms.cloud
+DOTCMS_AUTH_TOKEN=<API token, from a user with edit permissions>
+DOTCMS_SITE_ID=<site identifier>
+ENABLE_UVE_MODE=true
 ```
 
 - Token: dotCMS → **Settings → Users → (user) → API Access Tokens**.
 - Site id: dotCMS → **Settings → Sites → (your site)**.
+- `ENABLE_UVE_MODE` controls whether the app honors the UVE editor's
+  `?mode=...` parameters. See **Editor security** below.
+
+All variables are **server-only** (no `NEXT_PUBLIC_` prefix), so none of them
+can end up in the browser bundle — the token stays secret by construction.
+Browser image requests don't need the host either: the image loader emits
+relative `/dA/...` URLs and a rewrite in `next.config.ts` proxies them to
+`DOTCMS_HOST` server-side. (Legacy `NEXT_PUBLIC_DOTCMS_*` names are still read
+as fallbacks for older `.env` files.)
+
+### Editor security — two environments
+
+Honoring `?mode=EDIT_MODE` means anyone hitting the URL with that parameter
+gets working (unpublished) content — dotCMS authorizes the *server's* token,
+not the visitor. Deploy two environments so production can never serve it:
+
+| | Production | Preview / editing (UVE target) |
+| --- | --- | --- |
+| `ENABLE_UVE_MODE` | unset / `false` — editor params ignored, always LIVE | `true` |
+| API token | read-only user | user with edit permissions |
+| UVE app URL | — | points here (or localhost) |
+
+The two layers are independent: production ignores editor params *and* its
+token can't read working versions — both would have to be misconfigured to
+leak unpublished content. Protect the preview deployment itself with Vercel
+Deployment Protection so its URL isn't publicly readable.
 
 Run the app:
 

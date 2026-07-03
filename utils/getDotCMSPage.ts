@@ -30,10 +30,16 @@ const VALID_MODES = ["EDIT_MODE", "PREVIEW_MODE", "LIVE"];
  * Maps the query params the UVE editor appends to the iframe URL onto the
  * SDK's page request params. Without this, every fetch defaults to LIVE mode
  * and unpublished (working-only) pages 404 inside the editor.
+ *
+ * Gated by ENABLE_UVE_MODE (server-only env var): unless it is "true", all
+ * editor params are ignored and every request renders LIVE. Keep it unset in
+ * production so visitors can't read working content via ?mode=EDIT_MODE.
  */
 export function buildPageRequestParams(
   searchParams: Record<string, string | string[] | undefined>,
 ): DotCMSPageRequestParams {
+  if (process.env.ENABLE_UVE_MODE !== "true") return {};
+
   const first = (v: string | string[] | undefined) =>
     Array.isArray(v) ? v[0] : v;
 
