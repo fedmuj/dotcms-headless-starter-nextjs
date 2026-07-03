@@ -1,5 +1,8 @@
 import { notFound } from "next/navigation";
-import { getDotCMSPage } from "@/utils/getDotCMSPage";
+import {
+  getDotCMSPage,
+  buildPageRequestParams,
+} from "@/utils/getDotCMSPage";
 import { fragmentNav, navigationQuery } from "@/utils/queries";
 import { Page } from "@/views/Page";
 import Header from "@/components/Header";
@@ -14,6 +17,7 @@ import Footer from "@/components/Footer";
 
 interface PageProps {
   params: Promise<{ slug?: string[] }>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
 }
 
 /*
@@ -24,14 +28,21 @@ function resolvePath(slug?: string[]): string {
   return `/${(slug ?? []).join("/")}`;
 }
 
-export default async function CatchAllPage({ params }: PageProps) {
+export default async function CatchAllPage({ params, searchParams }: PageProps) {
   const { slug } = await params;
   const path = resolvePath(slug);
 
-  /* Fetch the page data from DotCMS, including the nav tree via GraphQL. */
+  /*
+   * Fetch the page data from DotCMS, including the nav tree via GraphQL.
+   * The UVE editor appends mode/language/persona params to the URL — they
+   * must reach the fetch or unpublished pages 404 inside the editor.
+   */
   const pageContent = await getDotCMSPage(path, {
-    content: { navigation: navigationQuery },
-    fragments: [fragmentNav],
+    ...buildPageRequestParams(await searchParams),
+    graphql: {
+      content: { navigation: navigationQuery },
+      fragments: [fragmentNav],
+    },
   });
   if (!pageContent) return notFound();
 
