@@ -2,6 +2,8 @@
 
 A headless CMS frontend built with **Next.js 16** and the **DotCMS React SDK**. DotCMS acts as the content backend; this app fetches pages, layout, and content via the DotCMS API and renders them as a standard React/Next.js site.
 
+> **Component setup:** see [COMPONENTS.md](./COMPONENTS.md) for how to enable the Header, Banner, Banner Carousel and FMCCard components — including pushing content types with the dotCMS CLI and configuring UVE for localhost.
+
 ---
 
 ## Table of Contents
