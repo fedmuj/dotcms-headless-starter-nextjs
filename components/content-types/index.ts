@@ -1,6 +1,9 @@
 import Banner from "./Banner";
 import BannerCarousel from "./BannerCarousel";
+import CoverTier from "./CoverTier";
+import FaqWidget from "./FaqWidget";
 import FMCCard from "./FMCCard";
+import WebPageContent from "./WebPageContent";
 
 /*
  * Maps DotCMS content-types to React components.
@@ -12,5 +15,8 @@ import FMCCard from "./FMCCard";
 export const pageComponents = {
   Banner: Banner,
   BannerCarousel: BannerCarousel,
+  CoverTier: CoverTier,
+  FaqWidget: FaqWidget,
   FMCCard: FMCCard,
+  webPageContent: WebPageContent,
 };
