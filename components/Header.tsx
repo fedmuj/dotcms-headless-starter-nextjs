@@ -3,7 +3,7 @@ import type { DotCMSNavigationItem } from "@dotcms/types";
 
 /*
  * Site header component. Receives the nav items fetched from DotCMS and
- * optionally a logo image URL/alt text. Renders a sticky translucent bar
+ * optionally a logo image URL/alt text. Renders a sticky solid navy bar
  * with the brand on the left and the top-level navigation on the right.
  * Nested nav items (children) are intentionally not rendered yet.
  */
@@ -29,7 +29,7 @@ export default function Header({
   const activePath = normalizePath(currentPath);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-gray-200/70 bg-white/80 backdrop-blur-md">
+    <header className="sticky top-0 z-50 bg-brand-900 shadow-md ring-1 ring-white/5">
       <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-8 gap-y-2 px-4 py-3 sm:px-6">
         <Link
           href="/"
@@ -40,7 +40,7 @@ export default function Header({
             // eslint-disable-next-line @next/next/no-img-element
             <img src={logo} alt={logoAlt} className="h-8 w-auto" />
           ) : (
-            <span className="text-lg font-semibold tracking-tight text-gray-900">
+            <span className="text-lg font-semibold tracking-tight text-white">
               dotCMS Starter
             </span>
           )}
@@ -57,10 +57,10 @@ export default function Header({
                     href={item.href}
                     target={item.target}
                     aria-current={isActive ? "page" : undefined}
-                    className={`rounded-md px-3 py-1.5 text-sm font-medium transition-colors ${
+                    className={`rounded-md px-3 py-1.5 text-sm font-semibold transition-colors ${
                       isActive
-                        ? "bg-gray-100 text-gray-900"
-                        : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                        ? "bg-accent text-white shadow-sm"
+                        : "text-slate-100 hover:bg-white/10 hover:text-white"
                     }`}
                   >
                     {item.title}

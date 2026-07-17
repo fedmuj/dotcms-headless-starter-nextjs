@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { DotCMSNavigationItem } from "@dotcms/types";
 
 /*
- * Site footer component. Dark counterpart to the glass header: brand and
+ * Site footer component. Deep-navy counterpart to the header: brand and
  * tagline on the left, the top-level DotCMS nav on the right, and a hairline
  * bottom bar with the copyright. Server component — no client JS needed.
  */
@@ -13,7 +13,7 @@ interface FooterProps {
 
 export default function Footer({ navItems = [] }: FooterProps) {
   return (
-    <footer className="mt-12 bg-gray-900 text-gray-400">
+    <footer className="mt-12 bg-brand-900 text-slate-400">
       <div className="mx-auto flex max-w-6xl flex-col gap-8 px-4 py-12 sm:flex-row sm:items-start sm:justify-between sm:px-6">
         <div className="max-w-xs">
           <Link
@@ -35,7 +35,7 @@ export default function Footer({ navItems = [] }: FooterProps) {
                   <Link
                     href={item.href}
                     target={item.target}
-                    className="text-sm transition-colors hover:text-white"
+                    className="text-sm transition-colors hover:text-accent"
                   >
                     {item.title}
                   </Link>

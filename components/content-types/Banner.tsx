@@ -38,7 +38,7 @@ export default function Banner(contentlet: BannerProps) {
 
   return (
     <section
-      className="relative my-6 flex min-h-[420px] items-end overflow-hidden rounded-2xl bg-gradient-to-br from-gray-900 to-gray-700 ring-1 ring-gray-200/70 sm:min-h-[520px]"
+      className="relative my-6 flex min-h-[420px] items-end overflow-hidden rounded-xl bg-gradient-to-br from-brand-800 to-brand-600 ring-1 ring-brand-900/10 sm:min-h-[520px]"
       style={{ color: textColor || "#ffffff" }}
     >
       {imageSrc && (
@@ -52,10 +52,13 @@ export default function Banner(contentlet: BannerProps) {
           className="object-cover"
         />
       )}
-      {/* Scrim keeps the overlay text readable regardless of the image. */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/25 to-transparent" />
+      {/* Lighter navy scrim — the text panel now carries legibility, so let
+          more of the image show through. */}
+      <div className="absolute inset-0 bg-gradient-to-t from-brand-900/55 via-brand-900/15 to-transparent" />
 
-      <div className="relative flex max-w-2xl flex-col items-start gap-3 p-6 sm:p-10">
+      {/* Frosted navy panel behind the copy — lifts the text off the image
+          and gives the hero a more deliberate, branded composition. */}
+      <div className="relative m-5 flex max-w-xl flex-col items-start gap-3 rounded-xl bg-brand-900/70 p-6 ring-1 ring-white/10 backdrop-blur-sm sm:m-8 sm:p-8">
         <h1 className="text-3xl font-bold tracking-tight sm:text-5xl">
           <DotCMSEditableText
             contentlet={contentlet}
@@ -79,7 +82,7 @@ export default function Banner(contentlet: BannerProps) {
         {link && (
           <Link
             href={link}
-            className="mt-2 rounded-md border border-white/25 bg-white/15 px-5 py-2.5 text-sm font-medium backdrop-blur-md transition-colors hover:bg-white/30"
+            className="mt-2 rounded-md bg-accent px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-accent-600"
           >
             {buttonText ? (
               <DotCMSEditableText

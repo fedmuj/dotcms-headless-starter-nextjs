@@ -42,7 +42,9 @@ function resolveStyles(styles: Record<string, unknown> = {}) {
   const background = (styles["background"] as string) ?? "bg-white";
   const titleStyle = styles["title-style"];
   return {
-    horizontal: styles["orientation"] === "horizontal",
+    /* Default to horizontal (image left, text right); editors can still
+       pick "vertical" explicitly in the Styles panel. */
+    horizontal: styles["orientation"] !== "vertical",
     imageRatio: (styles["image-ratio"] as string) ?? "aspect-[16/10]",
     background,
     /* Dark backgrounds bring their own text color; let text inherit it. */
@@ -59,14 +61,14 @@ export default function FMCCard(contentlet: FMCCardProps) {
 
   return (
     <article
-      className={`group my-6 flex h-full overflow-hidden rounded-2xl ring-1 ring-gray-200/70 transition-shadow hover:shadow-lg ${styles.background} ${
+      className={`group my-6 flex h-full max-w-2xl overflow-hidden rounded-xl shadow-sm ring-1 ring-slate-200 transition-shadow hover:shadow-md ${styles.background} ${
         styles.horizontal ? "flex-col sm:flex-row" : "flex-col"
       }`}
     >
       {imageSrc && (
         <div
           className={`relative overflow-hidden ${styles.imageRatio} ${
-            styles.horizontal ? "sm:aspect-auto sm:w-2/5 sm:shrink-0" : ""
+            styles.horizontal ? "sm:aspect-auto sm:w-44 sm:shrink-0 md:w-52" : ""
           }`}
         >
           <Image
@@ -80,12 +82,12 @@ export default function FMCCard(contentlet: FMCCardProps) {
         </div>
       )}
 
-      <div className="flex flex-1 flex-col gap-2 p-6">
+      <div className="flex flex-1 flex-col gap-2 p-5">
         <h2
-          className={`text-xl tracking-tight ${
+          className={`text-lg tracking-tight ${
             styles.titleBold ? "font-bold" : "font-semibold"
           } ${styles.titleItalic ? "italic" : ""} ${
-            styles.darkBackground ? "" : "text-gray-900"
+            styles.darkBackground ? "" : "text-brand-900"
           }`}
         >
           <DotCMSEditableText
@@ -100,7 +102,7 @@ export default function FMCCard(contentlet: FMCCardProps) {
         {description && (
           <div
             className={`whitespace-pre-line text-sm/relaxed ${
-              styles.darkBackground ? "opacity-85" : "text-gray-600"
+              styles.darkBackground ? "opacity-85" : "text-slate-600"
             }`}
           >
             <DotCMSEditableText
@@ -114,10 +116,10 @@ export default function FMCCard(contentlet: FMCCardProps) {
         {link && (
           <Link
             href={link}
-            className={`mt-auto inline-flex w-fit items-center rounded-md px-4 py-2 text-sm font-medium transition-colors ${
+            className={`mt-auto inline-flex w-fit items-center rounded-md px-4 py-2 text-sm font-semibold transition-colors ${
               styles.darkBackground
-                ? "border border-white/25 bg-white/15 text-white backdrop-blur-md hover:bg-white/30"
-                : "bg-gray-900 text-white hover:bg-gray-700"
+                ? "bg-white text-brand-900 hover:bg-slate-100"
+                : "bg-accent text-white hover:bg-accent-600"
             }`}
           >
             {buttonText ? (

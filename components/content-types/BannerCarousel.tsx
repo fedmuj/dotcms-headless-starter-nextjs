@@ -112,7 +112,7 @@ export default function BannerCarousel(contentlet: BannerCarouselProps) {
   return (
     <section aria-roledescription="carousel" aria-label="Banner carousel">
       <div className="relative">
-        <div className="overflow-hidden rounded-2xl">
+        <div className="overflow-hidden rounded-xl">
           <div
             className="flex transition-transform duration-500 ease-out"
             style={{ transform: `translateX(-${current * 100}%)` }}
@@ -133,7 +133,7 @@ export default function BannerCarousel(contentlet: BannerCarouselProps) {
           type="button"
           aria-label="Previous slide"
           onClick={() => goTo(current - 1)}
-          className="absolute left-3 top-1/2 flex size-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/25 bg-white/15 text-white backdrop-blur-md transition-colors hover:bg-white/30"
+          className="absolute left-3 top-1/2 flex size-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-brand-900/40 text-white backdrop-blur-md transition-colors hover:bg-accent"
         >
           <svg viewBox="0 0 20 20" fill="currentColor" className="size-5">
             <path
@@ -147,7 +147,7 @@ export default function BannerCarousel(contentlet: BannerCarouselProps) {
           type="button"
           aria-label="Next slide"
           onClick={() => goTo(current + 1)}
-          className="absolute right-3 top-1/2 flex size-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/25 bg-white/15 text-white backdrop-blur-md transition-colors hover:bg-white/30"
+          className="absolute right-3 top-1/2 flex size-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-brand-900/40 text-white backdrop-blur-md transition-colors hover:bg-accent"
         >
           <svg viewBox="0 0 20 20" fill="currentColor" className="size-5">
             <path
@@ -169,8 +169,8 @@ export default function BannerCarousel(contentlet: BannerCarouselProps) {
             onClick={() => goTo(i)}
             className={`h-2.5 rounded-full transition-all ${
               i === current
-                ? "w-6 bg-gray-800"
-                : "w-2.5 bg-gray-300 hover:bg-gray-400"
+                ? "w-6 bg-accent"
+                : "w-2.5 bg-slate-300 hover:bg-slate-400"
             }`}
           />
         ))}

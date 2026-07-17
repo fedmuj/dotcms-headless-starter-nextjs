@@ -19,8 +19,8 @@ export const FMC_CARD_SCHEMA = defineStyleEditorSchema({
           id: "orientation",
           label: "Card orientation",
           options: [
-            { label: "Vertical", value: "vertical" },
             { label: "Horizontal", value: "horizontal" },
+            { label: "Vertical", value: "vertical" },
           ],
         }),
         styleEditorField.dropdown({
@@ -42,8 +42,8 @@ export const FMC_CARD_SCHEMA = defineStyleEditorSchema({
           label: "Background",
           options: [
             { label: "White", value: "bg-white" },
-            { label: "Light gray", value: "bg-gray-100" },
-            { label: "Brand", value: "bg-blue-900 text-white" },
+            { label: "Light gray", value: "bg-slate-100" },
+            { label: "Brand", value: "bg-brand-800 text-white" },
           ],
         }),
         styleEditorField.checkboxGroup({
